@@ -1,4 +1,4 @@
-import { LitElement, html, css } from "lit";
+import { LitElement, html, css } from "https://cdn.jsdelivr.net/gh/lit/dist@2/core/lit-core.min.js";
 
 export class ToDoList extends LitElement {
 	static properties = {
@@ -14,10 +14,7 @@ export class ToDoList extends LitElement {
 
 	constructor() {
 		super();
-		this._listItems = [
-			{ text: "Make to-do list", completed: true },
-			{ text: "Complete Lit tutorial", completed: false },
-		];
+		this._listItems = [{ text: "To do list 작성하기", completed: true }];
 		this.hideCompleted = false;
 	}
 
@@ -28,18 +25,18 @@ export class ToDoList extends LitElement {
 				${items.map((item) => html` <li class=${item.completed ? "completed" : ""} @click=${() => this.toggleCompleted(item)}>${item.text}</li>`)}
 			</ul>
 		`;
-		const caughtUpMessage = html` <p>You're all caught up!</p> `;
+		const caughtUpMessage = html` <p>오늘 할일 끝</p> `;
 		const todosOrMessage = items.length > 0 ? todos : caughtUpMessage;
 
 		return html`
-			<h2>To Do</h2>
+			<h2>오늘의 할일</h2>
 			${todosOrMessage}
 			<input id="newitem" aria-label="New item" />
 			<button @click=${this.addToDo}>Add</button>
 			<br />
 			<label>
 				<input type="checkbox" @change=${this.setHideCompleted} ?checked=${this.hideCompleted} />
-				Hide completed
+				완료된 목록 가리기
 			</label>
 		`;
 	}
